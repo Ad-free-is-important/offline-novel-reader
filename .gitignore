@@ -1,0 +1,24 @@
+# Private signing materials
+**/signing/
+*.p12
+*.pfx
+*.jks
+*.keystore
+*.pem
+*.key
+**/password.txt
+.env
+.env.*
+!.env.example
+
+# Local build and editor files
+**/build/
+**/dist/
+**/test-classes/
+**/node_modules/
+**/.gradle/
+local.properties
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db

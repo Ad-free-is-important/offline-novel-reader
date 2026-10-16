@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,viewport-fit=cover"><meta name="theme-color" content="#F6F5F0"><meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'"><title>一页阅读</title><link rel="stylesheet" href="style.css"></head>
+<body>
+<svg class="symbols" xmlns="http://www.w3.org/2000/svg"><defs>
+<symbol id="i-book" viewBox="0 0 24 24"><path d="M12 6c-2-2-5-3-9-2v15c4-1 7 0 9 2 2-2 5-3 9-2V4c-4-1-7 0-9 2Zm0 0v15"/></symbol>
+<symbol id="i-plus" viewBox="0 0 24 24"><path d="M12 5v14M5 12h14"/></symbol>
+<symbol id="i-search" viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m16 16 5 5"/></symbol>
+<symbol id="i-settings" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="3"/><circle cx="15" cy="17" r="3"/></symbol>
+<symbol id="i-left" viewBox="0 0 24 24"><path d="m14 5-7 7 7 7"/></symbol>
+<symbol id="i-right" viewBox="0 0 24 24"><path d="m10 5 7 7-7 7"/></symbol>
+<symbol id="i-close" viewBox="0 0 24 24"><path d="m6 6 12 12M18 6 6 18"/></symbol>
+<symbol id="i-more" viewBox="0 0 24 24"><circle cx="5" cy="12" r="1"/><circle cx="12" cy="12" r="1"/><circle cx="19" cy="12" r="1"/></symbol>
+<symbol id="i-mark" viewBox="0 0 24 24"><path d="M6 3h12v18l-6-4-6 4Z"/></symbol>
+<symbol id="i-list" viewBox="0 0 24 24"><path d="M9 6h12M9 12h12M9 18h12M3 6h1M3 12h1M3 18h1"/></symbol>
+<symbol id="i-type" viewBox="0 0 24 24"><path d="m2 19 6-14 6 14M4 15h8m3 4 4-10 4 10m-7-3h6"/></symbol>
+<symbol id="i-arrow" viewBox="0 0 24 24"><path d="M5 12h14m-6-6 6 6-6 6"/></symbol>
+<symbol id="i-check" viewBox="0 0 24 24"><path d="m5 12 4 4L20 5"/></symbol>
+<symbol id="i-moon" viewBox="0 0 24 24"><path d="M21 13A9 9 0 0 1 11 3 9 9 0 1 0 21 13Z"/></symbol>
+<symbol id="i-down" viewBox="0 0 24 24"><path d="m5 9 7 7 7-7"/></symbol>
+<symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+</defs></svg>
+<main id="shelf" class="shelf">
+  <header class="brandbar"><div class="brand"><span class="brand-icon"><svg><use href="#i-book"/></svg></span><span class="brand-name">一页阅读</span></div><button class="iconbtn" id="globalSettings" aria-label="应用设置"><svg><use href="#i-settings"/></svg></button></header>
+  <section class="greeting"><span class="eyebrow">YOUR QUIET CORNER</span><h1>把时间，留给故事。</h1><p id="shelfDescription">书在手边，故事随时继续。</p></section>
+  <section id="continue" class="continue" aria-label="继续阅读"></section>
+  <div class="shelf-heading"><h2>我的书架 <span id="bookCount">0</span></h2><button class="primary compact" id="importTop"><svg><use href="#i-plus"/></svg>导入小说</button></div>
+  <div class="shelf-tools"><label class="searchbox"><svg><use href="#i-search"/></svg><input id="shelfSearch" placeholder="搜索书名或作者" aria-label="搜索书架"></label><select id="sortBooks" aria-label="书架排序"><option value="recent">最近阅读</option><option value="added">最近导入</option><option value="title">书名排序</option></select></div>
+  <div id="bookGrid" class="book-grid"></div>
+  <footer class="shelf-foot"><span class="tiny-dot"></span>本地保存 · 离线阅读 · 无需登录</footer>
+</main>
+<section id="reader" class="reader hidden" aria-label="小说阅读页">
+  <header class="reader-top reader-panel"><button class="iconbtn" id="backShelf" aria-label="返回书架"><svg><use href="#i-left"/></svg></button><button id="readerTitle" class="reader-title" aria-label="打开目录"><span id="readerTitleText"></span></button><button id="toggleMark" class="iconbtn" aria-label="添加书签"><svg><use href="#i-mark"/></svg></button></header>
+  <div id="readingFrame" class="reading-frame"><div id="readingBody" class="reading-body" tabindex="0" aria-label="小说正文"><article id="article"></article></div></div>
+  <footer class="reader-foot"><span id="footChapter"></span><button id="footProgress" aria-label="打开阅读进度"></button></footer>
+  <div id="readerDock" class="reader-dock reader-panel"><div class="reading-mode-row"><div class="mode-switch" role="group" aria-label="阅读方式"><button data-quick-mode="scroll" aria-pressed="true">滚动</button><button data-quick-mode="paged" aria-pressed="false">翻页</button></div><span id="scrollModeHint" class="mode-hint">上下滑动阅读</span><div id="pageControls" class="page-controls hidden"><button id="prevPage" aria-label="上一页"><svg><use href="#i-left"/></svg></button><span id="pagePosition">1/1 页</span><button id="nextPage" aria-label="下一页"><svg><use href="#i-right"/></svg></button></div></div><div class="chapter-nav"><button id="prevChapter"><svg><use href="#i-left"/></svg>上一章</button><span id="chapterNumber"></span><button id="nextChapter">下一章<svg><use href="#i-right"/></svg></button></div><div class="dock-actions"><button id="openToc"><svg><use href="#i-list"/></svg>目录</button><button id="addMark"><svg><use href="#i-mark"/></svg>书签</button><button id="openStyle"><svg><use href="#i-type"/></svg>页面</button><button id="openSearch"><svg><use href="#i-search"/></svg>搜索</button></div><p class="dock-hint" id="gestureHint">轻点正文收起菜单</p></div>
+</section>
+<div id="overlay" class="overlay hidden"><section id="sheet" class="sheet" role="dialog" aria-modal="true" aria-labelledby="sheetTitle"><div class="sheet-handle"></div><header class="sheet-head"><div><h2 id="sheetTitle"></h2><p id="sheetSubtitle"></p></div><button id="closeSheet" class="iconbtn" aria-label="关闭弹窗"><svg><use href="#i-close"/></svg></button></header><div id="sheetBody" class="sheet-body"></div></section></div>
+<div id="busy" class="busy hidden" role="status"><span class="spinner"></span><span id="busyMessage">正在处理…</span></div><div id="toast" class="toast" role="status"></div>
+<input type="file" id="webImport" accept=".txt" multiple hidden>
+<script src="model.js"></script><script src="pagination.js"></script><script src="page-curl.js"></script><script src="reader-controls.js"></script><script src="app.js"></script>
+</body></html>
